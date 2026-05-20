@@ -1,16 +1,34 @@
 # nock-skills
 
-Claude Code skills from [Nock Technologies](https://nocktechnologies.com) — patterns extracted from running autonomous AI development pipelines at production scale.
+Claude Code skills from [Nock Technologies](https://nocktechnologies.com) — patterns extracted from running a 14-agent autonomous fleet at production scale.
 
 Each skill is a folder with a `SKILL.md` file that Claude Code can load as a slash command or via the Skill tool.
 
 ## Skills
+
+### Engineering
 
 | Skill | What it does |
 |-------|-------------|
 | [engineering-pipeline](./engineering-pipeline/) | 7-phase PR pipeline — plan, build, verify, gate, push, review, merge+docs |
 | [session-handoffs](./session-handoffs/) | Structured context transfer between sessions |
 | [branch-isolation](./branch-isolation/) | Branch discipline for parallel agents |
+
+### Fleet Operations
+
+| Skill | What it does |
+|-------|-------------|
+| [fleet-heartbeat](./fleet-heartbeat/) | Multi-channel polling pattern — check inboxes, dispatch work, state snapshots |
+| [overnight-operations](./overnight-operations/) | Patterns for agents running unattended — dispatch rules, merge authority, notification thresholds |
+| [compaction-survival](./compaction-survival/) | Survive context compaction — checkpoint discipline, state snapshots, recovery protocol |
+
+### Memory
+
+| Skill | What it does |
+|-------|-------------|
+| [nockbrain](./nockbrain/) | Intelligence persistence — when and how to use handoffs, memory, diary, decisions |
+
+See also: [nock-brain](https://github.com/nocktechnologies/nock-brain) — standalone memory toolkit with auto-injection for Claude Code
 
 ## Install
 
@@ -56,12 +74,15 @@ Or invoked as slash commands if your setup supports it:
 
 ## Background
 
-These skills were extracted from Nock Technologies' internal Claude Code pipeline, which runs Kit (Claude) and Codex as parallel autonomous agents building [NockCC](https://nocktechnologies.io) — a multi-agent AI development dashboard.
+These skills were extracted from Nock Technologies' internal fleet, which runs 14 Claude Code agents building [NockCC](https://nocktechnologies.io) — a multi-agent AI development platform.
 
-The patterns here solve real problems we ran into at scale:
-- **engineering-pipeline** — prevents the most common agent mistake: shipping code without a security review or docs update
-- **session-handoffs** — prevents context loss between the ~71-hour session limit resets
-- **branch-isolation** — prevents agents on parallel branches from accidentally switching to each other's branch and contaminating diffs
+The patterns solve real problems we hit running agents autonomously:
+- **engineering-pipeline** — prevents the most common agent mistake: shipping without security review
+- **session-handoffs** — prevents context loss at session boundaries
+- **branch-isolation** — prevents agents from contaminating each other's branches
+- **compaction-survival** — prevents state loss when Claude Code compacts context
+- **fleet-heartbeat** — keeps a coordinator agent aware of fleet state across channels
+- **overnight-operations** — dispatch discipline for unattended operation
 
 ## License
 
