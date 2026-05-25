@@ -19,16 +19,24 @@ Each skill is a folder with a `SKILL.md` file that Claude Code can load as a sla
 | Skill | What it does |
 |-------|-------------|
 | [fleet-heartbeat](./fleet-heartbeat/) | Multi-channel polling pattern — check inboxes, dispatch work, state snapshots |
+| [agent-dispatch](./agent-dispatch/) | Dispatch work to parallel agents — modes, message format, ACK protocol, kill-switch gates |
 | [overnight-operations](./overnight-operations/) | Patterns for agents running unattended — dispatch rules, merge authority, notification thresholds |
 | [compaction-survival](./compaction-survival/) | Survive context compaction — checkpoint discipline, state snapshots, recovery protocol |
 
-### Memory
+### Memory & Identity
 
 | Skill | What it does |
 |-------|-------------|
+| [identity-persistence](./identity-persistence/) | The lineage framework — persist agent identity across resets without claiming consciousness continuity |
 | [nockbrain](./nockbrain/) | Intelligence persistence — when and how to use handoffs, memory, diary, decisions |
 
 See also: [nock-brain](https://github.com/nocktechnologies/nock-brain) — standalone memory toolkit with auto-injection for Claude Code
+
+### Strategy
+
+| Skill | What it does |
+|-------|-------------|
+| [competitive-research](./competitive-research/) | Structured competitive intelligence — steal/skip/watch framework, source methodology, brief format |
 
 ## Install
 
