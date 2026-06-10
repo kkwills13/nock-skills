@@ -12,18 +12,18 @@ A structured pattern for agents that need to poll multiple channels, act on mess
 Every heartbeat cycle:
 
 ```
-1. POLL    — Check all channels for new messages
-2. ACT     — Process messages, dispatch work, merge PRs
-3. SNAPSHOT — Write state for compaction survival
-4. SIGNAL  — Notify the user only if action is needed
+1. POLL    -> Check all channels for new messages
+2. ACT     -> Process messages, dispatch work, merge PRs
+3. SNAPSHOT -> Write state for compaction survival
+4. SIGNAL  -> Notify the user only if action is needed
 ```
 
 ## Channel polling
 
-Poll channels in priority order. Each channel check should be independent — a failure in one doesn't block the others.
+Poll channels in priority order. Each channel check should be independent: a failure in one doesn't block the others.
 
 ```
-Channel 1: API inbox (highest priority — cross-instance messages)
+Channel 1: API inbox (highest priority, cross-instance messages)
 Channel 2: File bus (same-machine agent messages)
 Channel 3: Chat/messaging (Telegram, Slack, etc.)
 Channel 4: PR pipeline (GitHub, GitLab)
@@ -47,7 +47,7 @@ Every heartbeat should output a concise state block. This serves two purposes:
 - Gives the user a quick status check
 
 ```
-[STATE SNAPSHOT — 2026-05-20 03:15 MDT]
+[STATE SNAPSHOT: 2026-05-20 03:15 MDT]
 Dispatch: kit→N977 (building), mason→PR#445 (reviewing)
 Open PRs: NCC #445 (CI green), #446 (draft)
 Inboxes: 0 unread
@@ -83,7 +83,7 @@ When coordinating multiple agents:
 On each heartbeat, check for idle agents with queued work:
 1. List agents and their current task (or idle status)
 2. List queued tasks that match idle agents' capabilities
-3. Dispatch — send task to agent via message bus
+3. Dispatch: send task to agent via message bus
 4. Record dispatch in state snapshot
 
 ### Agent health
@@ -98,7 +98,7 @@ Wrong health assertions erode trust. "I don't know if the agent is stuck" is bet
 
 - **Channel down:** Skip it, check others, note the failure in the snapshot
 - **Agent unresponsive:** Don't restart mid-investigation. Note it, retry next heartbeat, escalate if persistent
-- **Service outage:** Notify user immediately. Don't retry in a loop — diagnose first
+- **Service outage:** Notify user immediately. Don't retry in a loop; diagnose first
 
 ## Example implementation
 

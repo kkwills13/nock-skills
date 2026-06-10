@@ -19,7 +19,7 @@ A simple, structured way to transfer context between Claude Code sessions. When 
 At the end of your session, write a handoff document. Keep it under 400 words. Include:
 
 ```markdown
-# Handoff — [date]
+# Handoff: [date]
 
 ## What I was working on
 [One sentence describing the task]
@@ -49,14 +49,14 @@ At the end of your session, write a handoff document. Keep it under 400 words. I
 At the start of a new session:
 
 1. Read the handoff document first, before any code.
-2. Verify the claimed state is accurate — check the files mentioned.
+2. Verify the claimed state is accurate. Check the files mentioned.
 3. If action items are checked off, update the handoff before proceeding.
 4. Identify any "Do NOT do" items and load them into working memory.
 
 ## What makes a good handoff
 
 **Good:**
-- "The auth middleware refactor is ~70% done. `core/auth.py` is updated. `views.py` still uses the old pattern on lines 44–67. Don't touch `tests/test_auth.py` — I wrote new tests but they're commented out until the refactor is done."
+- "The auth middleware refactor is ~70% done. `core/auth.py` is updated. `views.py` still uses the old pattern on lines 44-67. Don't touch `tests/test_auth.py`; I wrote new tests but they're commented out until the refactor is done."
 - "Decided to use a DB-level lock (SELECT FOR UPDATE) instead of Redis. See the ADR in `.claude/decisions/`."
 
 **Bad:**

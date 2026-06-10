@@ -76,7 +76,7 @@ Each agent operates in its own directory. They can't see each other's unstaged c
 
 ## Solution 3: Explicit CLAUDE.md rules
 
-The simplest option — state the rule explicitly in your project's `CLAUDE.md`:
+The simplest option: state the rule explicitly in your project's `CLAUDE.md`:
 
 ```markdown
 ## Branch discipline
@@ -97,9 +97,9 @@ This works for well-behaved agents following instructions, but doesn't prevent m
 ## Combining approaches
 
 For the highest reliability, combine all three:
-1. **Worktrees** — separate working directories at the OS level
-2. **Branch-lock hook** — automated enforcement inside the session
-3. **CLAUDE.md rule** — explicit instruction that's always in context
+1. **Worktrees**: separate working directories at the OS level
+2. **Branch-lock hook**: automated enforcement inside the session
+3. **CLAUDE.md rule**: explicit instruction that's always in context
 
 ## Signs you need this
 

@@ -18,10 +18,10 @@ Every 10-15 messages in a long session, emit a state snapshot in your response. 
 ### Checkpoint format
 
 ```
-[SESSION CHECKPOINT — msg ~N, DATE TIME TZ]
+[SESSION CHECKPOINT: msg ~N, DATE TIME TZ]
 Active work: [what you're building/doing right now]
 Dispatch table: [who is building what, by Nock/task ID]
-Open PRs: [repo: #number — title — status]
+Open PRs: [repo: #number, title, status]
 Decisions this session: [key decisions made, numbered]
 Pending items: [what's queued]
 Blocking items: [what's stuck and why]
@@ -33,7 +33,7 @@ Next step: [one line]
 - Every 10-15 messages in sessions crossing 20+ turns
 - After any batch of decisions or task assignments
 - Before switching to a complex new topic (preserves prior context)
-- When you sense the conversation is getting long — don't wait
+- When you sense the conversation is getting long. Don't wait
 
 ### When NOT to write one
 
@@ -48,7 +48,7 @@ For maximum durability, write checkpoints to a file too:
 ```bash
 # Write checkpoint to a file that survives session loss entirely
 cat > ~/.claude-remote/state/checkpoint.md << 'EOF'
-# Checkpoint — 2026-05-20 22:45 MDT
+# Checkpoint: 2026-05-20 22:45 MDT
 
 ## Dispatch Table
 | Agent | Task | Status |
@@ -57,8 +57,8 @@ cat > ~/.claude-remote/state/checkpoint.md << 'EOF'
 | mason | N977 quota guardrails | building |
 
 ## Open PRs
-- #445 auth middleware (kit) — CI green, awaiting review
-- #446 quota limits (mason) — draft
+- #445 auth middleware (kit): CI green, awaiting review
+- #446 quota limits (mason): draft
 
 ## Decisions
 1. PostgreSQL over SQLite for auth service
@@ -76,7 +76,7 @@ Read this file at the start of your next session or after compaction recovery.
 After compaction (you'll notice your context feels thin):
 
 1. Check for an external checkpoint file
-2. If found, read it — it has the full state from before compaction
+2. If found, read it. It has the full state from before compaction
 3. If not found, look for the last `[SESSION CHECKPOINT]` in the conversation summary
 4. Verify claimed state against live sources (git status, API checks)
 5. Resume from verified state
@@ -89,7 +89,7 @@ After compaction (you'll notice your context feels thin):
 
 Checkpoints are intra-session. Handoffs are inter-session. Use both:
 
-- **Checkpoints** — every 10-15 messages, preserves state within a session
-- **Handoffs** — at session end, transfers state to the next session
+- **Checkpoints**: every 10-15 messages, preserves state within a session
+- **Handoffs**: at session end, transfers state to the next session
 
 If a session ends unexpectedly (crash, context limit), the last checkpoint becomes the de facto handoff.

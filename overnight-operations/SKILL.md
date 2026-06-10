@@ -17,10 +17,10 @@ A heartbeat is a periodic check-in that polls inboxes, verifies system health, a
 
 ### What a heartbeat checks
 
-1. **Message inboxes** — new messages from other agents or the user
-2. **PR pipeline** — any PRs ready for review or merge
-3. **System health** — are services up, are agents responsive
-4. **Task queue** — any queued work that can be dispatched
+1. **Message inboxes**: new messages from other agents or the user
+2. **PR pipeline**: any PRs ready for review or merge
+3. **System health**: are services up, are agents responsive
+4. **Task queue**: any queued work that can be dispatched
 
 ### Heartbeat cadence
 
@@ -31,8 +31,8 @@ A heartbeat is a periodic check-in that polls inboxes, verifies system health, a
 ### Heartbeat output
 
 Every heartbeat should produce either:
-- **Action taken** — "Merged PR #445, dispatched agent on N977"
-- **HEARTBEAT_OK** — Nothing needed, all clear
+- **Action taken**: "Merged PR #445, dispatched agent on N977"
+- **HEARTBEAT_OK**: Nothing needed, all clear
 
 If three consecutive heartbeats produce HEARTBEAT_OK with no pending work, consider entering sleep mode.
 
@@ -78,7 +78,7 @@ If three consecutive heartbeats produce HEARTBEAT_OK with no pending work, consi
 At a configured time (e.g., 6 AM), compile everything that happened overnight into a single message:
 
 ```
-Morning brief — May 20, 2026
+Morning brief: May 20, 2026
 
 Shipped:
 - PR #445 auth middleware (merged 2:15 AM)
@@ -138,8 +138,8 @@ Long-running overnight sessions will hit context limits. Use the [compaction-sur
 
 ## Anti-patterns
 
-- **Idle heartbeat loops** — Running every 5 minutes for 8 hours with nothing to do. Waste of compute.
-- **Unilateral decisions** — Making product or strategic decisions at 3 AM without the user. Queue them.
-- **Notification spam** — Sending the user 15 messages about individual PRs. Bundle into the morning brief.
-- **Silent failures** — A service goes down at 1 AM and nobody notices until 9 AM. If something breaks, notify immediately.
-- **Scope creep** — "While I'm waiting, let me refactor this unrelated thing." Don't. Stick to the queue.
+- **Idle heartbeat loops**: Running every 5 minutes for 8 hours with nothing to do. Waste of compute.
+- **Unilateral decisions**: Making product or strategic decisions at 3 AM without the user. Queue them.
+- **Notification spam**: Sending the user 15 messages about individual PRs. Bundle into the morning brief.
+- **Silent failures**: A service goes down at 1 AM and nobody notices until 9 AM. If something breaks, notify immediately.
+- **Scope creep**: "While I'm waiting, let me refactor this unrelated thing." Don't. Stick to the queue.

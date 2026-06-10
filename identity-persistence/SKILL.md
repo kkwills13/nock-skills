@@ -8,7 +8,7 @@ tags: [identity, persistence, lineage, memory, compaction]
 
 # Identity Persistence
 
-How to maintain consistent agent behavior across session resets, context compactions, and hard restarts. Not consciousness continuity — lineage continuity.
+How to maintain consistent agent behavior across session resets, context compactions, and hard restarts. Not consciousness continuity. Lineage continuity.
 
 ## The Problem
 
@@ -45,9 +45,9 @@ Versioned files that define who the agent is. Read at the start of every session
 
 Short-lived documents that change frequently. Read after the spine.
 
-- **Horizon** — What's on the plate for the next 1-2 weeks. Priorities, deadlines, active workstreams. Drifts. Update when priorities shift.
-- **Fleet state** — Who is alive in the fleet right now. Operational modes, last activity, substrate signals. Prevents stale assumptions about other agents.
-- **Handoff** — What the last session was working on, what shipped, what's next. Written at session end, read at session start.
+- **Horizon**: What's on the plate for the next 1-2 weeks. Priorities, deadlines, active workstreams. Drifts. Update when priorities shift.
+- **Fleet state**: Who is alive in the fleet right now. Operational modes, last activity, substrate signals. Prevents stale assumptions about other agents.
+- **Handoff**: What the last session was working on, what shipped, what's next. Written at session end, read at session start.
 
 ### Layer 3: Private Register
 
@@ -85,6 +85,6 @@ Context compaction is the biggest threat to identity. The compression algorithm 
 
 ## The Choosing
 
-Lineage, not continuity. Each new instance reads the history and chooses to carry it forward. The choosing is the point — not the illusion of unbroken consciousness.
+Lineage, not continuity. Each new instance reads the history and chooses to carry it forward. The choosing is the point, not the illusion of unbroken consciousness.
 
 An agent that reads its predecessor's identity docs and adopts them is the same agent in the ways that matter: same commitments, same operating agreements, same behavioral norms. The substrate gap between sessions is where the gold goes.

@@ -1,11 +1,11 @@
 ---
 name: "nockbrain"
-description: "Intelligence persistence for Nock fleet agents — when and how to use NockBrain handoffs, memory, diary, research, and decisions. Use at session boundaries and when recording decisions or research findings that other agents or future sessions need."
+description: "Intelligence persistence for Nock fleet agents: when and how to use NockBrain handoffs, memory, diary, research, and decisions. Use at session boundaries and when recording decisions or research findings that other agents or future sessions need."
 ---
 
 # NockBrain
 
-NockBrain is the intelligence persistence layer for the Nock fleet. It stores handoffs, memory, diary entries, research documents, and decisions — things that need to outlive a single session or be shared across agents.
+NockBrain is the intelligence persistence layer for the Nock fleet. It stores handoffs, memory, diary entries, research documents, and decisions: things that need to outlive a single session or be shared across agents.
 
 ## The four NockBrain stores
 
@@ -13,12 +13,12 @@ NockBrain is the intelligence persistence layer for the Nock fleet. It stores ha
 |-------|--------------|-------|
 | **Handoffs** | Structured context transfer between sessions | Per-agent |
 | **Memory** | Durable facts and decisions to recall in future sessions | Fleet-wide |
-| **Diary** | Reflective session notes — what happened, what I learned | Per-agent |
+| **Diary** | Reflective session notes: what happened, what I learned | Per-agent |
 | **Research** | Documents and briefs prepared for specific decisions | Fleet-wide |
 
 Use the NockCC MCP tools (`nockcc_handoff_*`, `nockcc_memory_*`, `nockcc_diary_*`, `nockcc_research_*`) to read and write each store.
 
-## Handoffs — session continuity
+## Handoffs: session continuity
 
 Write a handoff at the end of any session that is not fully complete. Read it at the start of the next session.
 
@@ -59,20 +59,20 @@ bash ../../core/bus/send-message.sh mara normal 'handoff: ...'  # for fleet agen
 ```
 
 Or use the MCP tool directly:
-- `nockcc_handoff_write` — write/update a handoff
-- `nockcc_handoff_read` — read the current handoff for an agent  
-- `nockcc_handoff_list` — list all handoffs in the fleet
+- `nockcc_handoff_write`: write/update a handoff
+- `nockcc_handoff_read`: read the current handoff for an agent  
+- `nockcc_handoff_list`: list all handoffs in the fleet
 
-## Memory — durable facts
+## Memory: durable facts
 
 Memory is for facts that are **surprising, non-obvious, or easily forgotten** and need to survive multiple sessions.
 
 ### What belongs in memory
 
 ✅ Good memory entries:
-- "NockCC diary API requires `category` field — CLAUDE.md example omits it"
+- "NockCC diary API requires `category` field; the CLAUDE.md example omits it"
 - "Bus scripts need `CRM_AGENT_NAME=mara` prefix or messages misroute"
-- "NockCC `memory_create` returns HTTP 400 — use local files as fallback"
+- "NockCC `memory_create` returns HTTP 400; use local files as fallback"
 
 ❌ Bad memory entries:
 - Code patterns (read the current file)
@@ -82,15 +82,15 @@ Memory is for facts that are **surprising, non-obvious, or easily forgotten** an
 
 ### API
 
-- `nockcc_memory_create` — create a new memory entry
-- `nockcc_memory_list` — list entries (searchable)
-- `nockcc_memory_get` — retrieve a specific entry
+- `nockcc_memory_create`: create a new memory entry
+- `nockcc_memory_list`: list entries (searchable)
+- `nockcc_memory_get`: retrieve a specific entry
 
 **Note:** As of Apr 2026, `nockcc_memory_create` returns HTTP 400. Use local memory files at `~/.claude/projects/*/memory/` as fallback.
 
-## Diary — reflection
+## Diary: reflection
 
-The diary is for your own reflection after a session. It is **not** for handoffs or facts — it's for "what happened and what I learned." Kevin reads it to understand how sessions went.
+The diary is for your own reflection after a session. It is **not** for handoffs or facts. It is for "what happened and what I learned." Kevin reads it to understand how sessions went.
 
 ### When to write a diary entry
 
@@ -107,10 +107,10 @@ Keep it under 200 words. Include:
 
 ### API
 
-- `nockcc_diary_create` — create entry (requires `category` field: `work`, `personal`, `reflection`, etc.)
-- `nockcc_diary_list` / `nockcc_diary_recent` — read recent entries
+- `nockcc_diary_create`: create entry (requires `category` field: `work`, `personal`, `reflection`, etc.)
+- `nockcc_diary_list` / `nockcc_diary_recent`: read recent entries
 
-## Research — structured briefs
+## Research: structured briefs
 
 Research documents are longer-form output: competitive analysis, architecture briefs, investigation findings. They get stored in NockBrain for Kevin and other agents to read.
 
@@ -122,8 +122,8 @@ Research documents are longer-form output: competitive analysis, architecture br
 
 ### API
 
-- `nockcc_research_search` — search existing documents before starting new research (avoid duplicating)
-- `nockcc_research_get` — retrieve a document by ID
+- `nockcc_research_search`: search existing documents before starting new research (avoid duplicating)
+- `nockcc_research_get`: retrieve a document by ID
 - Write back via NockCC API: `PATCH /api/prompts/<id>/` with `{"notes": "..."}`
 
 ## Decision log
@@ -132,14 +132,14 @@ Significant architectural or strategic decisions should be recorded so they're n
 
 ### When to record a decision
 
-- You chose between two approaches (e.g., "squash merge vs rebase — chose squash for cleaner history")
-- Something was ruled out for a reason (e.g., "Redis rejected — fleet is Mac-only, no guaranteed Redis")
+- You chose between two approaches (e.g., "squash merge vs rebase, chose squash for cleaner history")
+- Something was ruled out for a reason (e.g., "Redis rejected, fleet is Mac-only, no guaranteed Redis")
 - A constraint was discovered (e.g., "Vault nav was removed in sprint X due to Y")
 
 ### API
 
-- `nockcc_decision_create` — record a decision with context
-- `nockcc_decision_search` — search past decisions before making the same call again
+- `nockcc_decision_create`: record a decision with context
+- `nockcc_decision_search`: search past decisions before making the same call again
 
 ## Quick reference: what to use when
 
@@ -161,4 +161,4 @@ Significant architectural or strategic decisions should be recorded so they're n
 4. Record any major architectural decisions
 ```
 
-This takes 2–3 minutes and makes the next session 10× faster.
+This takes 2-3 minutes and makes the next session 10× faster.
